@@ -4,23 +4,25 @@ import './App.css';
 
 import Contacts from './Components/Contacts';
 import Header from './Components/Header';
+import Provider from './context';
 
 const App = () =>  {
   return (
-    <div className="App">
 
-     <Header brand="Contact Manager"/>
+    <Provider>
+      <div className="App">
 
-     <div className='container'>
+        <Header brand="Contact Manager"/>
 
-     <Contacts />
+        <div className='container'>
 
-                    
-     </div>
+          <Contacts />
+              
+        </div>
 
-
-
-    </div>
+      </div>
+    </Provider>
+  
   );
 }
 
