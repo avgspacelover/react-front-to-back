@@ -4,7 +4,7 @@ import propTypes  from 'prop-types';
 
 export default function Header(props) {
   return (
-    <div>{props.brand}</div>
+    <h1 style= {{ color: "red", fontSize: '50px'}}>{props.brand}</h1>
   )
 }
 
