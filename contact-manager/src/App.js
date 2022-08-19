@@ -1,6 +1,8 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Contact from './Components/Contact';
+
+import Contacts from './Components/Contacts';
 import Header from './Components/Header';
 
 const App = () =>  {
@@ -9,7 +11,13 @@ const App = () =>  {
 
      <Header brand="Contact Manager"/>
 
-      <Contact name="jk" email="jk@gmail.com" phone= "8899443322"/>
+     <div className='container'>
+
+     <Contacts />
+
+                    
+     </div>
+
 
 
     </div>

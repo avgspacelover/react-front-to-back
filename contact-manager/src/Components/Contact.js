@@ -1,32 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import propTypes  from 'prop-types';
 import './Contact.css'
 
 const Contact = (props)=> {
 
-    const {name, email, phone} = props;
+    const {name, email, phone,id} = props.contact;
+
+    const [showInfo, setShowInfo]= useState(false)
+
+ 
+
+    const arrowDir = showInfo ? 'fa fa-sort-up': 'fa fa-sort-down'
+
+    const onDeleteClick = ()=> {
+        props.deleteClickHandler()
+    }
 
     return(
-        <div>
-            <h4>{name}</h4>
+        <div className='card card-body mb-3'>
+            <h4>{name} 
+                <i 
+                    className={arrowDir} 
+                    aria-hidden="true" 
+                    style={{cursor: 'pointer'}} 
+                    onClick={()=> setShowInfo(showInfo=> !showInfo)} >
+                
+                </i>
+                <i 
+                    className='fa fa-times'
+                    style={{cursor: 'pointer', float: 'right', color: 'red'}}
+                    onClick= {onDeleteClick} >
+                </i>
+            </h4>
 
-            <ul>
-                <li>
-                    Email: {email}
-                </li>
-                <li>
-                    Phone: {phone}
-                </li>
-            </ul>
+            {showInfo ? ( 
+                <ul className='list-group'>
+                
+                    <li className='list-group-item'>
+                        Email: {email}
+                    </li>
+                    <li className='list-group-item'>
+                        Phone: {phone}
+                    </li>
+                </ul> 
+            ): null }
         </div>
     )
 }
 
 
 Contact.propTypes = {
-    name: propTypes.string.isRequired,
-    email: propTypes.string.isRequired,
-    phone: propTypes.string.isRequired
-    
+    contact: propTypes.object.isRequired
 }
 export default Contact;
