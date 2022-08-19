@@ -4,7 +4,7 @@ import './Contact.css'
 
 const Contact = (props)=> {
 
-    const {name, email, phone,id} = props.contact;
+    const {name, email, phone} = props.contact;
 
     const [showInfo, setShowInfo]= useState(false)
 
@@ -13,7 +13,7 @@ const Contact = (props)=> {
     const arrowDir = showInfo ? 'fa fa-sort-up': 'fa fa-sort-down'
 
     const onDeleteClick = ()=> {
-        props.deleteClickHandler()
+        props.deleteContactHandler()
     }
 
     return(

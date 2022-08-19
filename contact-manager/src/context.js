@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Context = React.createContext()
+export const Context = React.createContext()
+
 
 
 const Provider = (props)=> {
-    const state = { contacts: [
+    const [state, setState] = useState({ contacts: [
             {
                 id: 1,
                 name: 'John Doe',
@@ -23,10 +24,10 @@ const Provider = (props)=> {
                 phone: '111-111-1111'
             }
         ]
-    }
+    })
 
     return (
-        <Context.Provider  value={state}>
+        <Context.Provider  value={[state, setState]}>
             {props.children}
         </Context.Provider>
 
@@ -36,4 +37,5 @@ const Provider = (props)=> {
 
 export default Provider;
 
-export const Consumer = Context.Consumer
+export const Consumer = Context.Consumer;
+

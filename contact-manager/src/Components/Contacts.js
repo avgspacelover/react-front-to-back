@@ -1,46 +1,60 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useContext } from 'react';
+// import { useState } from 'react';
 import Contact from './Contact';
 
-import { Consumer } from '../context';
+import {Context } from '../context';
 
 
 
 export default function Contacts() {
-    const [contacts,setContacts] = useState();
+    
+    const [state,setState] = useContext(Context);
+    //console.log(state)
+    const {contacts}= state
 
+    const deleteContact =(id) => {
 
-    const deleteContact = (id) => {
-        const conts= contacts;
-        const newContacts = conts.filter(contact=> contact.id !== id);
+        const newContacts = contacts.filter(contact=> contact.id !== id)
 
-       setContacts(contacts=> newContacts)
-
+        setState({contacts: newContacts})
     }
-
-
   return (
-    <Consumer>
-        {value => {
-            const {contacts} = value
 
-            return (
+        <React.Fragment>
+            {contacts.map(contact => ( 
+                <Contact
+                    key={contact.id}
+                    contact= {contact}
+                    deleteContactHandler= {()=> deleteContact(contact.id)}
+                />)
+            )}
+        </React.Fragment>
 
-
-                <React.Fragment>
-                    {contacts.map(contact => ( 
-                        <Contact
-                            key={contact.id}
-                            contact= {contact}
-                            deleteClickHandler= {()=> deleteContact(contact.id)}
-                        
-                        />)
-                    )}
-                </React.Fragment>
-            )
-        }}
-    </Consumer>
-
-
-  )
+    )
 }
+
+
+/*
+
+  <Consumer>
+            {state => {
+                const contacts = state[0].contacts
+                console.log(state)
+                
+                return (
+
+
+                    <React.Fragment>
+                        {contacts.map(contact => ( 
+                            <Contact
+                                key={contact.id}
+                                contact= {contact}
+
+                            
+                            />)
+                        )}
+                    </React.Fragment>
+                )
+            }}
+        </Consumer>
+*/
