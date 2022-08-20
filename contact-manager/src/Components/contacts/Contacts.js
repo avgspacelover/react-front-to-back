@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 // import { useState } from 'react';
 import Contact from './Contact';
 
-import {Context } from '../context';
+import {Context} from '../../context';
 
 
 

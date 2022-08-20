@@ -2,8 +2,8 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import Contacts from './Components/Contacts';
-import Header from './Components/Header';
+import Contacts from './Components/contacts/Contacts';
+import Header from './Components/layout/Header';
 import Provider from './context';
 
 const App = () =>  {
