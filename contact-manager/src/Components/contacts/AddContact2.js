@@ -1,37 +1,32 @@
-import React, { useState, useContext } from 'react'
-
-import {Context} from '../../context';
-
+import React, {useRef } from 'react'
 
 export default function AddContact() {
 
-    const [data, setData] = useState({
-        name: '',
-        email: '',
-        phone: ''
-    })
+   
 
-    const [state,setState] = useContext(Context);
+    const nameRef = useRef('')
+    const emailRef = useRef('')
+
+    const phoneRef = useRef('')
 
 
     const onSubmit = (e) => {
         e.preventDefault() ;
-        console.log(data, state)
 
-        const {contacts}= state
-        data['id']= contacts.length+1
-        contacts.push(data)
-        const newContacts = contacts
+        const contact = {
+            name: nameRef.current.value,
 
-        setState({contacts: newContacts})
-        setData({
-            name: '',
-            email: '',
-            phone: ''
-        })
+            email: emailRef.current.value,
+
+            phone: phoneRef.current.value,
+
+
+        }
+
+        console.log(contact)
     }
   
-    const {name,email, phone}= data
+
     return (
         
         <div className='card mb-3'>
@@ -47,11 +42,8 @@ export default function AddContact() {
                             name="name"
                             className='form-control form-control-lg'
                             placeholder='Enter Name: '
-                            value = {name}
-                            onChange= {(e)=> setData({
-                                ...data,
-                                name: e.target.value
-                            })}
+                            ref={nameRef}
+                            
                         />
 
                     </div>
@@ -64,11 +56,8 @@ export default function AddContact() {
                             name="email"
                             className='form-control form-control-lg'
                             placeholder='Enter Email: '
-                            value= {email}
-                            onChange= {(e)=> setData({
-                                ...data,
-                                email: e.target.value
-                            })}
+                            ref= {emailRef}
+                           
                         />
 
                     </div>
@@ -81,11 +70,8 @@ export default function AddContact() {
                             name="phone"
                             className='form-control form-control-lg'
                             placeholder='Enter Phone No.: '
-                            value={phone}
-                            onChange= {(e)=> setData({
-                                ...data,
-                                phone: e.target.value
-                            })}
+                            ref={phoneRef}
+                           
                         />
 
                     </div>

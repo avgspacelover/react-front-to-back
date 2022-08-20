@@ -9,7 +9,7 @@ import {Context} from '../../context';
 export default function Contacts() {
     
     const [state,setState] = useContext(Context);
-    //console.log(state)
+
     const {contacts}= state
 
     const deleteContact =(id) => {
@@ -18,6 +18,8 @@ export default function Contacts() {
 
         setState({contacts: newContacts})
     }
+
+    console.log("check", contacts)
   return (
 
         <React.Fragment>

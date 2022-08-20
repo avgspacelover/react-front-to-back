@@ -5,6 +5,7 @@ import './App.css';
 import Contacts from './Components/contacts/Contacts';
 import Header from './Components/layout/Header';
 import Provider from './context';
+import AddContact from './Components/contacts/AddContact';
 
 const App = () =>  {
   return (
@@ -17,6 +18,8 @@ const App = () =>  {
         <div className='container'>
 
           <Contacts />
+
+          <AddContact />
               
         </div>
 
