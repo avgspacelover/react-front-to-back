@@ -1,66 +1,63 @@
-import React, { useState } from 'react';
-import propTypes  from 'prop-types';
-import './Contact.css'
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const Contact = (props)=> {
+class Contact extends Component {
+  state = {
+    showContactInfo: false
+  };
 
-    const {name, email, phone,id} = props.contact;
+  onDeleteClick = id => {
+    //// DELETE CONTACT ////
+  };
 
-    const [showInfo, setShowInfo]= useState(false)
+  render() {
+    const { id, name, email, phone } = this.props.contact;
+    const { showContactInfo } = this.state;
 
- 
-
-    const arrowDir = showInfo ? 'fa fa-sort-up': 'fa fa-sort-down'
-
-    const onDeleteClick = ()=> {
-        
-        props.deleteContactHandler()
-    }
-
-    return(
-        <div className='card card-body mb-3'>
-            <h4>{name} 
-                <i 
-                    className={arrowDir} 
-                    aria-hidden="true" 
-                    style={{cursor: 'pointer'}} 
-                    onClick={()=> setShowInfo(showInfo=> !showInfo)} >
-                
-                </i>
-                <i 
-                    className='fa fa-times'
-                    style={{cursor: 'pointer', float: 'right', color: 'red'}}
-                    onClick= {onDeleteClick} >
-                </i>
-
-                <Link to={`contact/edit/${id}`}>
-                    <i className="fa fa-pencil" style={{
-                        cursor: 'pointer',
-                        float: 'right',
-                        color: 'black',
-                        marginRight: '1rem'
-                    }}></i>
-                </Link>
-            </h4>
-
-            {showInfo ? ( 
-                <ul className='list-group'>
-                
-                    <li className='list-group-item'>
-                        Email: {email}
-                    </li>
-                    <li className='list-group-item'>
-                        Phone: {phone}
-                    </li>
-                </ul> 
-            ): null }
-        </div>
-    )
+    return (
+      <div className="card card-body mb-3">
+        <h4>
+          {name}{' '}
+          <i
+            onClick={() =>
+              this.setState({
+                showContactInfo: !this.state.showContactInfo
+              })
+            }
+            className="fas fa-sort-down"
+            style={{ cursor: 'pointer' }}
+          />
+          <i
+            className="fas fa-times"
+            style={{ cursor: 'pointer', float: 'right', color: 'red' }}
+            onClick={this.onDeleteClick.bind(this, id)}
+          />
+          <Link to={`contact/edit/${id}`}>
+            <i
+              className="fas fa-pencil-alt"
+              style={{
+                cursor: 'pointer',
+                float: 'right',
+                color: 'black',
+                marginRight: '1rem'
+              }}
+            />
+          </Link>
+        </h4>
+        {showContactInfo ? (
+          <ul className="list-group">
+            <li className="list-group-item">Email: {email}</li>
+            <li className="list-group-item">Phone: {phone}</li>
+          </ul>
+        ) : null}
+      </div>
+    );
+  }
 }
-
 
 Contact.propTypes = {
-    contact: propTypes.object.isRequired
-}
+  contact: PropTypes.object.isRequired
+};
+
 export default Contact;
