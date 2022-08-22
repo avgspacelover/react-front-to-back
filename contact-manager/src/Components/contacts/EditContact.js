@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import axios from 'axios';
 import {Context} from '../../context';
 import { TextInputGroup } from '../layout/TextInputGroup';
 
 
-export default function AddContact() {
+export default function EditContact(props) {
 
     const [data, setData] = useState({
         name: '',
@@ -14,6 +14,28 @@ export default function AddContact() {
     })
 
     const [state,setState] = useContext(Context);
+
+
+    useEffect(() => {
+        const {id} = props.match.params;
+
+        const fetchUserData=async()=>{
+        const res = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
+            
+            const contact = res.data
+
+            setData({
+                name: contact.name,
+                email: contact.email,
+                phone: contact.phone,
+                errors: {}
+            })
+        }
+        console.log(id)
+
+
+        fetchUserData()
+    },[props.match.params])
 
 
     const onSubmit = async(e) => {
@@ -38,12 +60,21 @@ export default function AddContact() {
         const {contacts}= state
         //data['id']= contacts.length+1
         //contacts.push(data)
+        const {id} = props.match.params;
 
-        await axios.post(`https://jsonplaceholder.typicode.com/users`, data)
+        const updContact = {
+            name,
+            email,
+            phone
+        }
+
+        await axios.put(`https://jsonplaceholder.typicode.com/users/${id}`, updContact)
             .then(res => {
-                
-                contacts.push(res.data)
-                const newContacts = contacts
+                const editCont = res.data
+                //contacts.push(res.data)
+                const newContacts = contacts.map(contact=>
+                    contact.id ===editCont.id ? (contact = editCont): contact
+                )
                 
                 setState({contacts: newContacts})
             
@@ -58,14 +89,14 @@ export default function AddContact() {
             errors: {}
         })
 
-       // history.push('/')
+
     }
   
     const {name,email, phone, errors}= data
     return (
         
         <div className='card mb-3'>
-            <div className='card-header'>Add Contact</div>
+            <div className='card-header'>Edit Contact</div>
 
             <div className='card-body'>
                 <form onSubmit={onSubmit}>
@@ -111,12 +142,16 @@ export default function AddContact() {
 
 
 
-                  
-                    <input
-                        type="submit"
-                        value="Add Contact"
-                        className='btn btn-light btn-block'
-                    />
+                    <div className='mx-auto'>
+
+                        <input
+                            type="submit"
+                            value="Edit Contact"
+                            className='btn btn-light btn-block mx-auto'
+                        />
+
+                    </div>
+                    
                 </form>
             </div>
         </div>

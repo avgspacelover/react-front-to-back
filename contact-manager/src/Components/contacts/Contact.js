@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import propTypes  from 'prop-types';
 import './Contact.css'
+import { Link } from 'react-router-dom';
 
 const Contact = (props)=> {
 
-    const {name, email, phone} = props.contact;
+    const {name, email, phone,id} = props.contact;
 
     const [showInfo, setShowInfo]= useState(false)
 
@@ -13,6 +14,7 @@ const Contact = (props)=> {
     const arrowDir = showInfo ? 'fa fa-sort-up': 'fa fa-sort-down'
 
     const onDeleteClick = ()=> {
+        
         props.deleteContactHandler()
     }
 
@@ -31,6 +33,15 @@ const Contact = (props)=> {
                     style={{cursor: 'pointer', float: 'right', color: 'red'}}
                     onClick= {onDeleteClick} >
                 </i>
+
+                <Link to={`contact/edit/${id}`}>
+                    <i className="fa fa-pencil" style={{
+                        cursor: 'pointer',
+                        float: 'right',
+                        color: 'black',
+                        marginRight: '1rem'
+                    }}></i>
+                </Link>
             </h4>
 
             {showInfo ? ( 

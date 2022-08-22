@@ -1,11 +1,45 @@
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import axios from 'axios'
 export const Context = React.createContext()
 
 
 
 const Provider = (props)=> {
-    const [state, setState] = useState({ contacts: [
+    const [state, setState] = useState({
+        contacts: []
+    })
+
+
+    useEffect( ()=> {
+        
+        const fetchData= async() => {
+            await axios.get('https://jsonplaceholder.typicode.com/users')
+                .then(response=> setState({contacts: response.data}))
+
+        }
+
+        fetchData()
+
+    },[])
+
+    return (
+        <Context.Provider  value={[state, setState]}>
+            {props.children}
+        </Context.Provider>
+
+    )
+}
+
+
+export default Provider;
+
+export const Consumer = Context.Consumer;
+
+
+
+/*
+
+{ contacts: [
             {
                 id: 1,
                 name: 'John Doe',
@@ -25,17 +59,4 @@ const Provider = (props)=> {
             }
         ]
     })
-
-    return (
-        <Context.Provider  value={[state, setState]}>
-            {props.children}
-        </Context.Provider>
-
-    )
-}
-
-
-export default Provider;
-
-export const Consumer = Context.Consumer;
-
+    */
