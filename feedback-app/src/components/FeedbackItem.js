@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 export const FeedbackItem = ({item, handleDelete}) => {
   return (
-    <Card reverse={true}>
+    <Card reverse={false}>
         <div className='num-display'>{item.rating}</div>
         <button className='close' onClick={()=> handleDelete(item.id)}>
             <FaTimes color='purple'/>

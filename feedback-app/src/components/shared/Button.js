@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-export const Button = ({ children, version, type, isDisabled}) => {
+const Button = ({ children, version, type, isDisabled}) => {
   return (
-    <button type={type} disabled={isDisabled} className={`btn-${version}`}>
+    <button type={type} disabled={isDisabled} className={`btn btn-${version}`}>
         {children}
     </button>
   )
@@ -10,7 +10,7 @@ export const Button = ({ children, version, type, isDisabled}) => {
 
 
 Button.defaultProps = {
-    version: 'primary',
+    version: 'secondary',
     type: 'button',
     isDisabled: false
 }
@@ -21,3 +21,5 @@ Button.propTypes = {
     type: PropTypes.string,
     isDisabled: PropTypes.bool
 }
+
+export default Button;
