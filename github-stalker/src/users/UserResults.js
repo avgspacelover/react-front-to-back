@@ -1,12 +1,16 @@
-import React, {useEffect, useState} from 'react'
-import Spinner from '../layout/Spinner';
+import React, {useEffect, useContext} from 'react'
+
+import Spinner from '../components/layout/Spinner';
+import GithubContext from '../context/github/GithubContext';
 import UserItem from './UserItem';
 
 export const UserResults = () => {
 
-    const [users, setUsers] = useState([]);
+    const {users, loading, fetchUsers}= useContext(GithubContext)
 
-    const [loading, setLoading] = useState(true);
+ //   const [users, setUsers] = useState([]);
+
+//  const [loading, setLoading] = useState(true);
 
 
 
@@ -16,25 +20,25 @@ export const UserResults = () => {
 
     },[])
 
-    const fetchUsers = async() => {
+    // const fetchUsers = async() => {
 
-        const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/`, {
+    //     const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users/`, {
             
-            mode: 'cors',
+    //         mode: 'cors',
             
-            headers : {
-                Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
-            }
-        })
+    //         headers : {
+    //             Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`
+    //         }
+    //     })
 
-        console.log('works',response)
+    //     console.log('works',response)
 
-        const data = await response.json()
-        console.log('works again',data)
+    //     const data = await response.json()
+    //     console.log('works again',data)
 
-        setUsers(data) ;
-        setLoading(false)
-    }
+    //     setUsers(data) ;
+    //     setLoading(false)
+    // }
 
   if(!loading){
     return (
