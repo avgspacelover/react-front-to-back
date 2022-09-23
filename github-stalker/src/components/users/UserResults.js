@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 
-import Spinner from '../components/layout/Spinner';
-import GithubContext from '../context/github/GithubContext';
+import Spinner from '../layout/Spinner';
+import GithubContext from '../../context/github/GithubContext';
 import UserItem from './UserItem';
 
 export const UserResults = () => {
