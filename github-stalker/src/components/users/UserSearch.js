@@ -8,7 +8,7 @@ export const UserSearch = () => {
     const {users, searchUsers, clearUsers} = useContext(GithubContext)
 
     const {setAlert} = useContext(AlertContext)
-    const [text, setText] = useState()
+    const [text, setText] = useState('')
 
     const handleChange= (e) => {
         setText(e.target.value)

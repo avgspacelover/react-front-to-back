@@ -5,19 +5,31 @@ import GithubContext from '../context/github/GithubContext'
 import { useParams } from 'react-router-dom'
 import Spinner from '../components/layout/Spinner'
 import RepoList from '../components/repos/RepoList'
+
+
+
+
+
 export const User = () => {
 
     const params = useParams()
+    
+    
     const { getUser, user, loading, getUserRepos, repos } =
     useContext(GithubContext)
-
+    
+    console.log("params", params, "login", params.login)
+    
+    
     useEffect ( () => {
+        console.log("use-effect", getUser, "", params.login)
         getUser(params.login)
         getUserRepos(params.login)
 
-    }, [])
+    },[params.login])
 
-
+    console.log( "user-check",user)
+    
     const {
         name,
         type,
@@ -36,7 +48,7 @@ export const User = () => {
       } = user
 
 
-
+      console.log("YES THIS PAGE")
 
 
     const websiteUrl = blog?.startsWith('http') ? blog : 'https://' + blog

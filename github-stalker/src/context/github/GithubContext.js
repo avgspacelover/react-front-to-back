@@ -56,7 +56,7 @@ export const GithubProvider = ({children}) => {
 
 
     const getUser = async(login) => {
-
+        console.log("HEYYYY")
         setLoading()
         
 
@@ -72,7 +72,9 @@ export const GithubProvider = ({children}) => {
         if(response.status===404){
             window.location= '/notfound'
         } else {
-            const {data} = await response.json()
+            const data = await response.json()
+
+            console.log('user-data', data)
 
             dispatch({
                 type: 'GET_USER',
