@@ -1,5 +1,5 @@
-import {createContext, useState, useReducer } from 'react';
-// import githubReducer from './GithubReducers';
+import {createContext, useReducer } from 'react';
+import githubReducer from './GithubReducers';
 const GithubContext = createContext();
 
 const GITHUB_URL = process.env.REACT_APP_GITHUB_URL
@@ -9,19 +9,26 @@ const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN
 
 export const GithubProvider = ({children}) => {
 
-    // const initialState = {
-    //     users: [],
-    //     loading: true
-    // }
+    const initialState = {
+        users: [],
+        loading: false
+    }
 
-    //const [state, dispatch] = useReducer(githubReducer, initialState)
+    const [state, dispatch] = useReducer(githubReducer, initialState)
     
-    const [users, setUsers] = useState([])
-    const [loading, setLoading]= useState(true)
+    //const [users, setUsers] = useState([])
+    //const [loading, setLoading]= useState(true)
 
-    const fetchUsers = async() => {
 
-        const response = await fetch(`${GITHUB_URL}/users`, {
+    const setLoading = ()=> dispatch({type: 'SET_LOADING'})
+
+    const searchUsers = async(text) => {
+
+        setLoading()
+        const params = new URLSearchParams({
+            q:text
+        })
+        const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
             
             mode: 'cors',
             
@@ -32,17 +39,30 @@ export const GithubProvider = ({children}) => {
 
         console.log('works',response)
 
-        const data = await response.json()
+        const {items} = await response.json()
         //console.log('works again',data)
 
-        setUsers(data) ;
-        setLoading(false)
+
+        dispatch({
+            type: 'GET_USERS',
+            payload: items
+        })
+
+        //setUsers(data) ;
+        //setLoading(false)
     }
 
+    const clearUsers = () => {
+
+        dispatch({type: 'CLEAR_USERS'})
+    }
+
+
     return <GithubContext.Provider value={{
-        users,
-        loading,
-        fetchUsers
+        users: state.users,
+        loading: state.loading,
+        searchUsers,
+        clearUsers
     }}>
 
         {children}

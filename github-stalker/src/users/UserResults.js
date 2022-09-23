@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from 'react'
+import React, {useContext} from 'react'
 
 import Spinner from '../components/layout/Spinner';
 import GithubContext from '../context/github/GithubContext';
@@ -6,7 +6,7 @@ import UserItem from './UserItem';
 
 export const UserResults = () => {
 
-    const {users, loading, fetchUsers}= useContext(GithubContext)
+    const {users, loading}= useContext(GithubContext)
 
  //   const [users, setUsers] = useState([]);
 
@@ -14,11 +14,11 @@ export const UserResults = () => {
 
 
 
-    useEffect( ()=> {
+    // useEffect( ()=> {
 
-        fetchUsers()
+    //     fetchUsers()
 
-    },[])
+    // },[])
 
     // const fetchUsers = async() => {
 
