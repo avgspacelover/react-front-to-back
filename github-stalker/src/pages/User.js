@@ -26,7 +26,7 @@ export const User = () => {
         getUser(params.login)
         getUserRepos(params.login)
 
-    },[params.login, getUser, getUserRepos])
+    },[])
 
     // const params= useParams();
     // const loginTag = params.login
@@ -197,7 +197,7 @@ export const User = () => {
 
 
 
-        <RepoList  repos={repos} />
+       { repos && <RepoList  repos={repos} /> }
 
     
     </>
