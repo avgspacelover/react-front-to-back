@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useRef } from 'react'
 import {FaCodepen, FaStore, FaUserFriends, FaUsers} from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import GithubContext from '../context/github/GithubContext'
@@ -18,15 +18,28 @@ export const User = () => {
     const { getUser, user, loading, getUserRepos, repos } =
     useContext(GithubContext)
     
+
     console.log("params", params, "login", params.login)
-    
     
     useEffect ( () => {
         console.log("use-effect", getUser, "", params.login)
         getUser(params.login)
         getUserRepos(params.login)
 
-    },[params.login])
+    },[params.login, getUser, getUserRepos])
+
+    // const params= useParams();
+    // const loginTag = params.login
+    // const loginRef = useRef(loginTag);
+
+    // useEffect(() => {
+    //     setLoading()
+    // if(loginTag !== loginRef.current){
+    //     getUser(loginTag);
+    //     getUserRepos(loginTag);
+    //     loginRef.current = loginTag;
+    // }
+    // }, []);
 
     console.log( "user-check",user)
     
