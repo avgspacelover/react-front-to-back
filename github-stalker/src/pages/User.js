@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useRef } from 'react'
+import React, { useEffect, useContext } from 'react'
 import {FaCodepen, FaStore, FaUserFriends, FaUsers} from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import GithubContext from '../context/github/GithubContext'
