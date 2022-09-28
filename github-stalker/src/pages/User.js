@@ -5,6 +5,7 @@ import GithubContext from '../context/github/GithubContext'
 import { useParams } from 'react-router-dom'
 import Spinner from '../components/layout/Spinner'
 import RepoList from '../components/repos/RepoList'
+import { getUser, getUserRepos } from '../context/github/GithubActions'
 
 
 
@@ -15,7 +16,7 @@ export const User = () => {
     const params = useParams()
     
     
-    const { getUser, user, loading, getUserRepos, repos } =
+    const { user, loading, repos, dispatch } =
     useContext(GithubContext)
     
 
@@ -23,23 +24,23 @@ export const User = () => {
     
     useEffect ( () => {
         console.log("use-effect", getUser, "", params.login)
-        getUser(params.login)
+        //getUser(params.login)
         getUserRepos(params.login)
 
-    },[])
+        dispatch({type: 'SET_LOADING'})
+        const getUserData= async()=> {
+          
+          const userData = await getUser(params.login)
+          dispatch({type: 'GET_USER', payload: userData })
 
-    // const params= useParams();
-    // const loginTag = params.login
-    // const loginRef = useRef(loginTag);
+          const userRepoData = await getUserRepos(params.login)
+          dispatch({type: 'GET_USERS', payload: userRepoData })
 
-    // useEffect(() => {
-    //     setLoading()
-    // if(loginTag !== loginRef.current){
-    //     getUser(loginTag);
-    //     getUserRepos(loginTag);
-    //     loginRef.current = loginTag;
-    // }
-    // }, []);
+        }
+
+        getUserData();
+
+    },[dispatch, params.login])
 
     console.log( "user-check",user)
     
@@ -203,3 +204,20 @@ export const User = () => {
     </>
   )
 }
+
+
+
+
+
+// const params= useParams();
+    // const loginTag = params.login
+    // const loginRef = useRef(loginTag);
+
+    // useEffect(() => {
+    //     setLoading()
+    // if(loginTag !== loginRef.current){
+    //     getUser(loginTag);
+    //     getUserRepos(loginTag);
+    //     loginRef.current = loginTag;
+    // }
+    // }, []);
