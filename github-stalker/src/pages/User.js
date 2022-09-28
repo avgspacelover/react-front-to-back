@@ -5,7 +5,7 @@ import GithubContext from '../context/github/GithubContext'
 import { useParams } from 'react-router-dom'
 import Spinner from '../components/layout/Spinner'
 import RepoList from '../components/repos/RepoList'
-import { getUser, getUserRepos } from '../context/github/GithubActions'
+import {getUserandRepos } from '../context/github/GithubActions'
 
 
 
@@ -23,18 +23,23 @@ export const User = () => {
     console.log("params", params, "login", params.login)
     
     useEffect ( () => {
-        console.log("use-effect", getUser, "", params.login)
+        //console.log("use-effect", getUser, "", params.login)
         //getUser(params.login)
-        getUserRepos(params.login)
+        //getUserRepos(params.login)
 
         dispatch({type: 'SET_LOADING'})
         const getUserData= async()=> {
           
-          const userData = await getUser(params.login)
-          dispatch({type: 'GET_USER', payload: userData })
+          const userData = await getUserandRepos(params.login)
+          dispatch({type: 'GET_USER_AND_REPOS', payload: userData })
 
-          const userRepoData = await getUserRepos(params.login)
-          dispatch({type: 'GET_USERS', payload: userRepoData })
+          
+          
+          // const userData = await getUser(params.login)
+          // dispatch({type: 'GET_USER', payload: userData })
+
+          // const userRepoData = await getUserRepos(params.login)
+          // dispatch({type: 'GET_USERS', payload: userRepoData })
 
         }
 
