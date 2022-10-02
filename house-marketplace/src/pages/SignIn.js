@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
+import {toast} from 'react-toastify';
 import {ReactComponent as ArrowRightIcon} from '../assets/svg/keyboardArrowRightIcon.svg'
-
 import visibilityIcon from '../assets/svg/visibilityIcon.svg';
+
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 export const SignIn = () => {
 
@@ -14,7 +16,7 @@ export const SignIn = () => {
     })
 
     const {email, password} = formData;
-    const navigate = useNavigate;
+    const navigate = useNavigate();
 
 
     const onChange= (e)=> {
@@ -24,6 +26,32 @@ export const SignIn = () => {
         }))
     }
 
+    const onSubmit=async (e)=> {
+        e.preventDefault();
+
+        try{
+
+            const auth = getAuth()
+
+            const userCredential = await signInWithEmailAndPassword( auth, email,password)
+            console.log("step 1");
+
+            if(userCredential.user){
+                console.log("step 1.5");
+
+                navigate('/profile');
+
+                console.log("step 2");
+
+            }
+        } catch(error) {
+            console.log("hey",error);
+
+            toast.error('Bad User Credentials');
+        }
+        
+
+    }
 
   return (
     <>
@@ -33,7 +61,7 @@ export const SignIn = () => {
             </header>
 
 
-            <form>
+            <form onSubmit={onSubmit}>
                 <input 
                     type="email"
                     className='emailInput'
@@ -69,7 +97,7 @@ export const SignIn = () => {
                 </Link>
 
                 <div className='signInBar'>
-                    <p className='singnIntext'>
+                    <p className='signInText'>
                         Sign In
                     </p>
                     <button className='signInButton'>
