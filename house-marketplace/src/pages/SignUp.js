@@ -5,10 +5,11 @@ import {toast} from 'react-toastify';
 import {ReactComponent as ArrowRightIcon} from '../assets/svg/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../assets/svg/visibilityIcon.svg';
 
-import {getAuth, createuserWithEmailAndPassword, updateProfile, createUserWithEmailAndPassword} from 'firebase/auth'
+import {getAuth,  updateProfile, createUserWithEmailAndPassword} from 'firebase/auth'
 
 import {db} from '../firebase.config'
 import { serverTimestamp, setDoc, doc } from 'firebase/firestore';
+import { OAuth } from '../components/OAuth';
 
 
 export const SignUp = () => {
@@ -126,7 +127,7 @@ export const SignUp = () => {
 
             </form>
 
-            {/* google OAuth */}
+            <OAuth />
 
             <Link to='/sign-in' className='registerLink' >
                 Sign In Instead
