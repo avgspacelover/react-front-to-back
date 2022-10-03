@@ -8,7 +8,7 @@ import {ReactComponent as ExploreIcon} from '../assets/svg/exploreIcon.svg'
 
 import {ReactComponent as PersonOutlineIcon} from '../assets/svg/personOutlineIcon.svg'
 
-import {ReactComponent as PersonIcon} from '../assets/svg/personIcon.svg'
+// import {ReactComponent as PersonIcon} from '../assets/svg/personIcon.svg'
 
 
 

@@ -1,8 +1,8 @@
 
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import { Navbar } from './components/Navbar';
-import { Explore } from './pages/Explore';
-import { Offer } from './pages/Offer';
+import Explore  from './pages/Explore';
+import Offer  from './pages/Offer';
 import { Category } from './pages/Category';
 
 import { Profile } from './pages/Profile';
@@ -17,6 +17,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { PrivateRoute } from './components/PrivateRoute';
 import { Listing } from './pages/Listing';
 import { Contact } from './pages/Contact';
+import { EditListing } from './pages/EditListing';
 
 
 
@@ -46,6 +47,8 @@ function App() {
 
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/create-listing' element={<CreateListing />} />
+          <Route path='/edit-listing?:listingId' element={<EditListing />} />
+
 
           <Route path='/category/:categoryName/listingId' element={<Listing />} />
 

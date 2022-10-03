@@ -8,7 +8,7 @@ import 'swiper/swiper-bundle.css'
 import { getDoc, doc } from 'firebase/firestore'
 import { getAuth } from 'firebase/auth'
 import { db } from '../firebase.config'
-import Spinner from '../components/Spinner'
+import {Spinner} from '../components/Spinner'
 import shareIcon from '../assets/svg/shareIcon.svg'
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
 
@@ -149,3 +149,6 @@ export const Listing = () => {
   )
 
 }
+
+
+// https://stackoverflow.com/questions/67552020/how-to-fix-error-failed-to-compile-node-modules-react-leaflet-core-esm-pat
