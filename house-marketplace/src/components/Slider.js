@@ -35,7 +35,7 @@ export const Slider = () => {
 
       setListings(listings)
       console.log("listings",listings)
-      console.log(listings[0].data.imgUrls)
+      console.log(listings[0].data.imgUrls[0])
 
      
       setLoading(false)
@@ -61,8 +61,12 @@ export const Slider = () => {
         <p className='exploreHeading'>Recommended</p>
 
 
-        {/* <Swiper slidesPerView={1} pagination={{ clickable: true }}>
-          {listings.map(({ data, id }) => (
+        <Swiper slidesPerView={1} pagination={{ clickable: true }}>
+          {listings.map(({ data, id }) => { 
+
+            const imageUrl = data.imgUrls[0];
+            
+            return(
 
             <SwiperSlide
               key={id}
@@ -70,7 +74,7 @@ export const Slider = () => {
             >
               <div
                 style={{
-                  background: `url(${data.imgUrls[0]}) center no-repeat`,
+                  background: `url(${imageUrl}) center no-repeat`,
                   backgroundSize: 'cover',
                 }}
                 className='swiperSlideDiv'
@@ -82,10 +86,10 @@ export const Slider = () => {
                 </p>
               </div>
             </SwiperSlide>
-          ))}
-        </Swiper> */}
+          )})}
+        </Swiper>
 
-        <img src={`url(${listings[0].data.imgUrls[1]})`} alt="ok"/>
+
       </>
     )
   )
