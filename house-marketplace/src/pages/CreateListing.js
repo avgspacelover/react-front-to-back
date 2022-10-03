@@ -22,8 +22,9 @@ import {
 
 
 export const CreateListing = () => {
+    console.log("check")
 
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     
     // eslint-disable-next-line
     const [geolocationEnabled, setGeolocationEnabled ] = useState(false)
