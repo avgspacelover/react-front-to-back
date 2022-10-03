@@ -114,7 +114,7 @@ export const CreateListing = () => {
             return new Promise((resolve, reject)=> {
                 const storage= getStorage();
     
-                const filename = `${auth.currentuser.uid}-${image.name}-${uuidv4()}`
+                const filename = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`
             
                 const storageRef = ref(storage, 'images/' + filename)
     
@@ -140,6 +140,7 @@ export const CreateListing = () => {
                       }
                     },
                     (error) => {
+                        console.log(error)
                       reject(error)
                     },
                     () => {
@@ -155,10 +156,13 @@ export const CreateListing = () => {
             
             })
         }
+
+        console.log(images)
     
         const imgUrls = await Promise.all(
             [...images].map((image) => storeImage(image))
-          ).catch(() => {
+          ).catch((error) => {
+            console.log(error)
             setLoading(false)
             toast.error('Images not uploaded')
             return
@@ -223,13 +227,12 @@ export const CreateListing = () => {
 
     const onMutate = (e)=> {
         let boolean = null;
-
-        if(e.target.value){
-            boolean= true
+        
+        if (e.target.value === 'true') {
+            boolean = true
         }
-
-        if(e.target.value){
-            boolean= false
+          if (e.target.value === 'false') {
+            boolean = false
         }
 
 

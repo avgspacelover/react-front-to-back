@@ -50,7 +50,7 @@ function App() {
           <Route path='/edit-listing?:listingId' element={<EditListing />} />
 
 
-          <Route path='/category/:categoryName/listingId' element={<Listing />} />
+          <Route path='/category/:categoryName/:listingId' element={<Listing />} />
 
           <Route path='/contact/:landlordId' element={<Contact />} />
 
