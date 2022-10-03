@@ -63,7 +63,7 @@ export const Slider = () => {
             >
               <div
                 style={{
-                  background: `url(${data.imgUrls[0]}) center no-repeat`,
+                  background: `url(${data?.imgUrls[0]}) center no-repeat`,
                   backgroundSize: 'cover',
                 }}
                 className='swiperSlideDiv'
