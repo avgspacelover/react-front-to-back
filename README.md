@@ -3,10 +3,9 @@
 ## Contact Manager
 
 Repository: https://github.com/antariksh17/react-front-to-back/contact-manager
+
 Repository(redux version): https://github.com/antariksh17/react-front-to-back/contact-manager-redux
 
-
-Live Site:
 
 ## Feedback Application
 
